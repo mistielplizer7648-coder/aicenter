@@ -1,0 +1,33 @@
+{
+  "manifest_version": 3,
+  "name": "企鹅助理浏览器扩展",
+  "short_name": "企鹅助理",
+  "version": "0.4.14",
+  "description": "支持稳定标签授权、Connector 配对自动恢复、Extension 自身截图权限闭环、Browser Fast Lane，并在 hwcr.vip 文档加载起点定向读取 convenience.getConvenienceList 再与 post-card DOM 安全合并。",
+  "permissions": [
+    "activeTab",
+    "scripting",
+    "storage",
+    "alarms",
+    "tabs",
+    "downloads",
+    "webNavigation",
+    "bookmarks"
+  ],
+  "host_permissions": [
+    "http://127.0.0.1:17361/*"
+  ],
+  "optional_host_permissions": [
+    "http://*/*",
+    "https://*/*"
+  ],
+  "action": {
+    "default_title": "企鹅助理",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "options_page": "options.html"
+}

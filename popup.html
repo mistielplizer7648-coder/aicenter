@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>企鹅助理</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <main class="shell">
+    <header>
+      <div class="brand"><span class="penguin">🐧</span><div><strong>企鹅助理</strong><small>浏览器协作</small></div></div>
+      <span id="statusDot" class="dot"></span>
+    </header>
+
+    <section id="unauthorized" class="card">
+      <h2>授权企鹅助理</h2>
+      <p>可只授权当前标签页，也可以授权本次浏览器会话，让新网页和新分页自动继续协作。</p>
+      <div class="row"><span>范围</span><select id="scopeSelect"><option value="tab">当前标签页</option><option value="browser">当前浏览器会话</option></select></div>
+      <p id="scopeDescription" class="hint">当前标签页：只限当前网站，跨网站后需要重新授权。</p>
+      <button id="viewBtn" class="secondary">仅查看</button>
+      <button id="interactBtn" class="primary">查看 + 操作</button>
+    </section>
+
+    <section id="authorized" class="card hidden">
+      <div class="row"><span>状态</span><strong id="sessionStatus">已授权</strong></div>
+      <div class="row"><span>范围</span><strong id="scopeStatus">当前标签页</strong></div>
+      <div class="row"><span>模式</span><select id="modeSelect"><option value="view">仅查看</option><option value="interact">查看 + 操作</option></select></div>
+      <div class="row"><span>页面</span><span id="pageTitle" class="truncate"></span></div>
+      <div class="actions"><button id="pauseBtn" class="secondary">暂停</button><button id="revokeBtn" class="danger">结束授权</button></div>
+    </section>
+
+    <section class="card">
+      <div class="sectionTitle"><h2>页面读取</h2><button id="snapshotBtn" class="ghost">刷新</button></div>
+      <textarea id="snapshot" readonly placeholder="授权后可读取页面标题、正文和可操作元素。"></textarea>
+    </section>
+
+    <section id="pendingCard" class="card warning hidden">
+      <h2>需要你确认</h2>
+      <p id="pendingSummary"></p>
+      <div class="actions"><button id="confirmBtn" class="primary">允许一次</button><button id="cancelPendingBtn" class="secondary">取消</button></div>
+    </section>
+
+    <details class="card">
+      <summary>开发测试控制台</summary>
+      <p class="hint">先点“刷新”得到 r1/r2…，再测试填写或点击。</p>
+      <div class="grid">
+        <input id="refInput" placeholder="元素 ref，如 r3">
+        <input id="valueInput" placeholder="要填写的文字">
+      </div>
+      <div class="actions wrap">
+        <button data-cmd="highlight" class="secondary">高亮</button>
+        <button data-cmd="fill" class="secondary">填写</button>
+        <button data-cmd="click" class="secondary">点击</button>
+        <button data-cmd="scroll" class="secondary">向下滚动</button>
+      </div>
+      <pre id="commandResult"></pre>
+    </details>
+
+    <section class="nativeBar">
+      <span id="nativeState">Connector 桥：未连接</span>
+      <button id="nativeBtn" class="ghost">连接</button>
+    </section>
+  </main>
+  <script src="popup.js"></script>
+</body>
+</html>
